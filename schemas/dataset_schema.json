@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Valorant Biometric Stress Dataset Schema",
+  "description": "Schema for the subject CSV files containing in-game events and physiological data.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "timestamp_ms": {
+        "description": "Unix epoch timestamp in milliseconds.",
+        "type": "integer"
+      },
+      "event": {
+        "description": "In-game action.",
+        "type": "string",
+        "enum": ["KILL", "DEATH", "SPIKE_PLANTED", "SPIKE_DEFUSED"]
+      },
+      "player_name": {
+        "description": "Valorant username of the acting subject. May be null for objective events.",
+        "type": ["string", "null"]
+      },
+      "victim": {
+        "description": "Valorant username of the affected player. Always 'ME' during a DEATH event.",
+        "type": ["string", "null"]
+      },
+      "weapon": {
+        "description": "Internal game engine name of the weapon.",
+        "type": ["string", "null"]
+      },
+      "bpm": {
+        "description": "Heart Rate in Beats Per Minute. (0 indicates sensor failure).",
+        "type": "integer",
+        "minimum": 0
+      },
+      "rr_ms": {
+        "description": "R-R Interval in milliseconds. (0 indicates sensor failure).",
+        "type": "integer",
+        "minimum": 0
+      },
+      "bio_status": {
+        "description": "Categorical classification of cardiac arousal.",
+        "type": "string",
+        "enum": ["NORMAL", "ELEVATED", "RECOVERY", "CALIBRATING", "INTENSE_SPIKE"]
+      },
+      "dominant_emotion": {
+        "description": "Primary facial emotion detected by computer vision.",
+        "type": "string",
+        "enum": ["neutral", "angry", "fear", "surprise", "happy", "sad", "NO_FACE"]
+      },
+      "stress_score": {
+        "description": "Psychological stress index derived from facial expressions.",
+        "type": "number",
+        "minimum": 0.0,
+        "maximum": 100.0
+      },
+      "composite_stress": {
+        "description": "Fused stress metric combining face and heart rate.",
+        "type": "number",
+        "minimum": 0.0
+      },
+      "image_file": {
+        "description": "Relative path to the webcam capture frame.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "timestamp_ms",
+      "event",
+      "bpm",
+      "rr_ms",
+      "bio_status",
+      "dominant_emotion",
+      "stress_score",
+      "composite_stress",
+      "image_file"
+    ]
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "title": "Valorant Biometric Data - SUB031",
+  "description": "Schema and metadata for PES1UG24AM918.csv",
+  "metadata": {
+    "subject_id": "SUB031",
+    "original_file": "PES1UG24AM918.csv",
+    "total_events_logged": 60,
+    "sensor_health_bpm": "OK",
+    "percentage_zero_bpm": 0.0
+  },
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "timestamp_ms": {
+          "type": "integer"
+        },
+        "event": {
+          "type": "string",
+          "enum": [
+            "KILL",
+            "DEATH",
+            "SPIKE_PLANTED",
+            "SPIKE_DEFUSED"
+          ]
+        },
+        "player_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "victim": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "weapon": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bpm": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rr_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "bio_status": {
+          "type": "string",
+          "enum": [
+            "NORMAL",
+            "ELEVATED",
+            "RECOVERY",
+            "CALIBRATING",
+            "INTENSE_SPIKE"
+          ]
+        },
+        "dominant_emotion": {
+          "type": "string",
+          "enum": [
+            "neutral",
+            "angry",
+            "fear",
+            "surprise",
+            "happy",
+            "sad",
+            "NO_FACE"
+          ]
+        },
+        "stress_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        },
+        "composite_stress": {
+          "type": "number",
+          "minimum": 0.0
+        },
+        "image_file": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "timestamp_ms",
+        "event",
+        "bpm",
+        "rr_ms",
+        "bio_status",
+        "dominant_emotion",
+        "stress_score",
+        "composite_stress",
+        "image_file"
+      ]
+    }
+  }
+}
